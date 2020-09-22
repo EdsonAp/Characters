@@ -4,18 +4,14 @@ import './App.css';
 class App extends Component{
 
   state = {
-    character : [
-      {name: 'Sky', id: 1},
-      {name: 'Rubble', id: 2},
-      {name: 'Chase', id: 3}
-    ]
+    character : []
   }
 
   componentDidMount(){
     //fetch returns a promise
     fetch('https://jsonplaceholder.typicode.com/users')
     .then(response => response.json()) //
-    .then(resp => console.log(resp))
+    .then(resp => this.setState({ character: resp}))
   }
 
   render(){
@@ -24,7 +20,7 @@ class App extends Component{
         {
           this.state.character.map(character=> <h1 key={character.id}> {character.name} </h1>)
         }
-      </div>
+      </div>  
     );
   }
 
