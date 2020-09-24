@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import "./App.css";
 import CardList from "./Components/card-list-component.jsx";
+import SearchBox from './Components/searchBox'
 
 class App extends Component {
   state = {
@@ -23,11 +24,17 @@ class App extends Component {
   }
 
   render() {
+    //Destructure state
+    const {characters, searchField} = this.state;
+    //filter method using desctrucuted characters
+    const filteredCharacters = characters.filter(character =>
+      character.name.toLowerCase().includes(searchField.toLocaleLowerCase())
+      )
+
     return (
       <div className="App">
-        <input type='search' placeholder='search characters' 
-          onChange={this.searchHandler}/>
-        <CardList characters={this.state.characters}></CardList>
+        <SearchBox searchHandler={this.searchHandler} placeholder='Search Character'/>
+        <CardList characters={filteredCharacters}></CardList>
       </div>
     );
   }
