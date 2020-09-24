@@ -1,30 +1,30 @@
-import React, { Component } from 'react';
-import './App.css';
-import CardList from './Components/card-list-component.jsx'
+import React, { Component } from "react";
+import "./App.css";
+import CardList from "./Components/card-list-component.jsx";
 
-
-class App extends Component{
-
+class App extends Component {
   state = {
-    characters : []
-  }
+    characters: [],
+    searchField: ''
+  };
 
-  componentDidMount(){
+  componentDidMount() {
     //fetch returns a promise
-    fetch('https://jsonplaceholder.typicode.com/users')
-    .then(response => response.json()) //
-    .then(resp => this.setState({ characters: resp}))
+    fetch("https://jsonplaceholder.typicode.com/users")
+      .then((response) => response.json()) //
+      .then((resp) => this.setState({ characters: resp }));
   }
 
-  render(){
+  render() {
     return (
       <div className="App">
-      <CardList characters={this.state.characters}>
-      </CardList>
-      </div>  
+        <input type='search' placeholder='search characters' 
+          onChange={e => this.setState({ searchField: e.target.value},
+         () => console.log(this.state.searchField))}/>
+        <CardList characters={this.state.characters}></CardList>
+      </div>
     );
   }
-
 }
 
 export default App;
