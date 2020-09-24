@@ -15,12 +15,18 @@ class App extends Component {
       .then((resp) => this.setState({ characters: resp }));
   }
 
+  searchHandler = (e) => {
+    return(
+      this.setState( { searchField: e.target.value } ),
+      console.log(e.target.value)
+    );
+  }
+
   render() {
     return (
       <div className="App">
         <input type='search' placeholder='search characters' 
-          onChange={e => this.setState({ searchField: e.target.value},
-         () => console.log(this.state.searchField))}/>
+          onChange={this.searchHandler}/>
         <CardList characters={this.state.characters}></CardList>
       </div>
     );
